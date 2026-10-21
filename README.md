@@ -1,6 +1,6 @@
 # Local Whiteboard
 
-A separate React + TypeScript app that reuses the Excalidraw source in `../My Project/excalidraw` to keep the editor UI and behavior in sync. Keep that source checkout beside this folder. Drawings are saved in the browser's IndexedDB on the current device; use **My local** to search and page through canvas history, switch drawings, rename them, delete them, create a new canvas, or choose a preset canvas background. The app does not upload scenes to a server, and it includes the editor's font assets locally.
+A standalone React + TypeScript app using the published `@excalidraw/excalidraw` package. Drawings are saved in the browser's IndexedDB on the current device; use **My local** to search and page through canvas history, switch drawings, rename them, delete them, create a new canvas, or choose a preset canvas background. The app does not upload scenes to a server, and it includes the editor's font assets locally.
 
 Install dependencies and start the app:
 

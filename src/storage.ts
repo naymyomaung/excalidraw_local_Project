@@ -1,6 +1,5 @@
 import { createStore, del, get, set } from "idb-keyval";
 
-import { clearAppStateForLocalStorage } from "@excalidraw/excalidraw/appState";
 import type { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types";
 import type { AppState, BinaryFiles } from "@excalidraw/excalidraw/types";
 
@@ -12,6 +11,76 @@ const LEGACY_SCENE_KEY = "current-scene";
 const CANVAS_INDEX_KEY = "canvases-index";
 const ACTIVE_CANVAS_KEY = "active-canvas";
 const storage = createStore("local-whiteboard", "scene-store");
+const APP_STATE_STORAGE_KEYS = new Set<string>([
+  "showWelcomeScreen",
+  "theme",
+  "currentItemBackgroundColor",
+  "currentItemEndArrowhead",
+  "currentItemFillStyle",
+  "currentItemFontFamily",
+  "currentItemFontSize",
+  "currentItemRoundness",
+  "currentItemArrowType",
+  "currentItemOpacity",
+  "currentItemRoughness",
+  "currentItemStartArrowhead",
+  "currentItemStrokeColor",
+  "currentItemStickynoteStrokeColor",
+  "currentItemStickynoteBackgroundColor",
+  "currentItemStrokeStyle",
+  "currentItemStrokeWidth",
+  "currentItemTextAlign",
+  "cursorButton",
+  "editingGroupId",
+  "activeTool",
+  "preferredSelectionTool",
+  "penMode",
+  "penDetected",
+  "exportBackground",
+  "exportEmbedScene",
+  "exportScale",
+  "exportWithDarkMode",
+  "gridSize",
+  "gridStep",
+  "gridModeEnabled",
+  "isBindingEnabled",
+  "boxSelectionMode",
+  "bindingPreference",
+  "isMidpointSnappingEnabled",
+  "showHints",
+  "inputDevice",
+  "defaultSidebarDockedPreference",
+  "lastPointerDownWith",
+  "name",
+  "openMenu",
+  "openSidebar",
+  "previousSelectedElementIds",
+  "scrolledOutside",
+  "scrollX",
+  "scrollY",
+  "selectedElementIds",
+  "selectedGroupIds",
+  "shouldCacheIgnoreZoom",
+  "stats",
+  "viewBackgroundColor",
+  "zenModeEnabled",
+  "zoom",
+  "selectedLinearElement",
+  "objectsSnapModeEnabled",
+  "lockedMultiSelections",
+  "bindMode",
+  "colorTopPicks",
+  "fontTopPicks",
+]);
+
+const clearAppStateForLocalStorage = (
+  appState: Partial<AppState>
+): Partial<AppState> =>
+  Object.fromEntries(
+    Object.entries(appState).filter(([key]) =>
+      APP_STATE_STORAGE_KEYS.has(key)
+    )
+  );
 
 export type LocalCanvas = {
   id: string;
